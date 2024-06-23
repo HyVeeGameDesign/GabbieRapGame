@@ -1,10 +1,14 @@
 document.addEventListener('DOMContentLoaded', function() {
     const eminemForm = document.getElementById('eminem-form');
     const bustaRhymesForm = document.getElementById('busta-rhymes-form');
-    // Add similar form variables for other rappers...
+    const nasForm = document.getElementById('nas-form');
+    const aTribeCalledQuestForm = document.getElementById('a-tribe-called-quest-form');
+    const digablePlanetsForm = document.getElementById('digable-planets-form');
+    const notoriousDavidForm = document.getElementById('notorious-david-form');
 
     const victorySection = document.getElementById('victory');
     const victoryMessage = document.getElementById('victory-message');
+    const confettiCanvas = document.getElementById('confetti');
 
     eminemForm.addEventListener('submit', function(event) {
         event.preventDefault();
@@ -16,23 +20,50 @@ document.addEventListener('DOMContentLoaded', function() {
         handleDiss('Busta Rhymes', 'busta-rhymes-input');
     });
 
-    // Add similar event listeners for other rappers...
+    nasForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        handleDiss('Nas', 'nas-input');
+    });
 
-    function handleDiss(rapperName, inputId) {
+    aTribeCalledQuestForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        handleDiss('A Tribe Called Quest', 'a-tribe-called-quest-input');
+    });
+
+    digablePlanetsForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        handleDiss('Digable Planets', 'digable-planets-input');
+    });
+
+    notoriousDavidForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        handleDiss('The Notorious D.A.V.I.D.', 'notorious-david-input', true);
+    });
+
+    function handleDiss(rapperName, inputId, isFinalBoss = false) {
         const inputText = document.getElementById(inputId).value.trim();
         if (inputText !== '') {
-            displayVictoryMessage(rapperName);
+            displayVictoryMessage(rapperName, isFinalBoss);
         }
     }
 
-    function displayVictoryMessage(rapperName) {
+    function displayVictoryMessage(rapperName, isFinalBoss) {
         victoryMessage.textContent = `Congratulations, you have defeated ${rapperName}.`;
+
+        if (isFinalBoss) {
+            animateConfetti();
+        }
+
         victorySection.style.display = 'block';
-        animateConfetti();
     }
 
     function animateConfetti() {
-        // Code to animate confetti goes here
-        // Example: This could use a library like confetti-js
+        // Implement confetti animation logic here
+        // Example using confetti-js library:
+        confetti.create(confettiCanvas, {
+            resize: true,
+            useWorker: true,
+        })({ particleCount: 200, spread: 200 });
     }
 });
+
