@@ -1,69 +1,80 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const eminemForm = document.getElementById('eminem-form');
-    const bustaRhymesForm = document.getElementById('busta-rhymes-form');
-    const nasForm = document.getElementById('nas-form');
-    const aTribeCalledQuestForm = document.getElementById('a-tribe-called-quest-form');
-    const digablePlanetsForm = document.getElementById('digable-planets-form');
-    const notoriousDavidForm = document.getElementById('notorious-david-form');
+const rapperImages = [
+    "eminem.png",
+    "busta_rhymes.png",
+    "nas.png",
+    "a_tribe_called_quest.png",
+    "digable_planets.png",
+    "notorious_david.png"
+];
 
-    const victorySection = document.getElementById('victory');
-    const victoryMessage = document.getElementById('victory-message');
-    const confettiCanvas = document.getElementById('confetti');
+document.getElementById('startButton').addEventListener('click', startGame);
+document.getElementById('submitButton').addEventListener('click', beatRapper);
+document.getElementById('nextButton').addEventListener('click', nextRapper);
 
-    eminemForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-        handleDiss('Eminem', 'eminem-input');
-    });
+const rappers = [
+    { name: "Eminem", bar: "That's an awfully hot coffee pot" },
+    { name: "Busta Rhymes", bar: "Gimme some more" },
+    { name: "Nas", bar: "I never sleep, 'cause sleep is the cousin of death" },
+    { name: "A Tribe Called Quest", bar: "Can I kick it? Yes, you can!" },
+    { name: "Digable Planets", bar: "We be to rap what key be to lock" },
+    { name: "The Notorious D.A.V.I.D.", bar: "You wanna sip mo' on my living room flo'? Play Nintendo with Cease a Leo. Pick up my phone say, 'Poppa not home'" }
+];
 
-    bustaRhymesForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-        handleDiss('Busta Rhymes', 'busta-rhymes-input');
-    });
+let currentRapperIndex = 0;
 
-    nasForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-        handleDiss('Nas', 'nas-input');
-    });
+function startGame() {
+    document.getElementById('introScreen').style.display = 'none';
+    document.getElementById('battleScreen').style.display = 'block';
+    showRapper();
+}
 
-    aTribeCalledQuestForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-        handleDiss('A Tribe Called Quest', 'a-tribe-called-quest-input');
-    });
+function showRapper() {
+    const rapper = rappers[currentRapperIndex];
+    document.getElementById('rapperName').textContent = rapper.name;
+    document.getElementById('rapperBar').textContent = `${rapper.name} just spat a bar: "${rapper.bar}"`;
+    document.getElementById('playerInput').value = '';
+    document.getElementById('submitButton').style.display = 'block';
+    document.getElementById('nextButton').style.display = 'none';
+    document.getElementById('rapperImage').src = `images/${rapperImages[currentRapperIndex]}`;
+}
 
-    digablePlanetsForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-        handleDiss('Digable Planets', 'digable-planets-input');
-    });
+function beatRapper() {
+    const rapper = rappers[currentRapperIndex];
+    document.getElementById('rapperName').textContent = 'Congratulations!';
+    document.getElementById('rapperBar').textContent = `You have successfully out-rapped ${rapper.name}`;
+    document.getElementById('submitButton').style.display = 'none';
+    document.getElementById('nextButton').style.display = 'block';
+}
 
-    notoriousDavidForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-        handleDiss('The Notorious D.A.V.I.D.', 'notorious-david-input', true);
-    });
-
-    function handleDiss(rapperName, inputId, isFinalBoss = false) {
-        const inputText = document.getElementById(inputId).value.trim();
-        if (inputText !== '') {
-            displayVictoryMessage(rapperName, isFinalBoss);
+function nextRapper() {
+    currentRapperIndex++;
+    if (currentRapperIndex < rappers.length) {
+        if (currentRapperIndex === rappers.length - 1) {
+            document.getElementById('rapperName').textContent = 'The greatest rapper known to man approaches';
+            document.getElementById('rapperBar').textContent = 'The one, the only, the mighty: NOTORIOUS D.A.V.I.D';
+            document.getElementById('nextButton').style.display = 'block';
+            document.getElementById('submitButton').style.display = 'none';
+        } else {
+            showRapper();
         }
+    } else {
+        document.getElementById('battleScreen').style.display = 'none';
+        document.getElementById('finalScreen').style.display = 'block';
+        animateConfetti();
+        animateFireworks();
     }
+}
 
-    function displayVictoryMessage(rapperName, isFinalBoss) {
-        victoryMessage.textContent = `Congratulations, you have defeated ${rapperName}.`;
+function animateConfetti() {
+    const confetti = document.getElementById('confetti');
+    confetti.style.display = 'block';
+}
 
-        if (isFinalBoss) {
-            animateConfetti();
-        }
-
-        victorySection.style.display = 'block';
-    }
-
-    function animateConfetti() {
-        // Implement confetti animation logic here
-        // Example using confetti-js library:
-        confetti.create(confettiCanvas, {
-            resize: true,
-            useWorker: true,
-        })({ particleCount: 200, spread: 200 });
-    }
-});
+function animateFireworks() {
+    const fireworks = document.getElementById('fireworks');
+    fireworks.style.display = 'block';
+    setTimeout(() => {
+        fireworks.style.display = 'none';
+    }, 5000); // fireworks display for 5 seconds
+}
 
