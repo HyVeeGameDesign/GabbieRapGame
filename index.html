@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Save Lil Lily</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="game-container">
+        <header>
+            <h1>Welcome Gabbie, or should I say, Lil Money Gabbie.</h1>
+            <p>Lil Lily has been captured by The Notorious D.A.V.I.D. You must save her from the wrath of hip-hop and rap stars. Are you ready to embark on this epic quest to save your wife?</p>
+        </header>
+        
+        <section id="eminem">
+            <h2>Eminem</h2>
+            <img src="eminem.png" alt="Eminem" width="300" height="300">
+            <p>Eminem: "thats an awfully hot coffee pot"</p>
+            <form id="eminem-form">
+                <input type="text" id="eminem-input" placeholder="Your diss...">
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+
+        <section id="busta-rhymes">
+            <h2>Busta Rhymes</h2>
+            <img src="busta_rhymes.png" alt="Busta Rhymes" width="300" height="300">
+            <p>Busta Rhymes: "Here's my message to the new competition"</p>
+            <form id="busta-rhymes-form">
+                <input type="text" id="busta-rhymes-input" placeholder="Your diss...">
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+
+        <!-- Repeat similar structure for other rappers -->
+
+        <section id="notorious-david">
+            <h2>The Notorious D.A.V.I.D.</h2>
+            <img src="notorious_david.png" alt="The Notorious D.A.V.I.D." width="300" height="300">
+            <p>The Notorious D.A.V.I.D.: "It was all a dream"</p>
+            <form id="notorious-david-form">
+                <input type="text" id="notorious-david-input" placeholder="Your diss...">
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+
+        <section id="victory">
+            <!-- This section will be hidden initially -->
+            <h2>Congratulations!</h2>
+            <p id="victory-message">You have defied all odds and defeated the great D.A.V.I.D. Collect your wife, you Lesby.</p>
+            <canvas id="confetti"></canvas>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
