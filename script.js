@@ -50,18 +50,24 @@ function nextRapper() {
     currentRapperIndex++;
     if (currentRapperIndex < rappers.length) {
         if (currentRapperIndex === rappers.length - 1) {
+            // Display Notorious D.A.V.I.D.
             document.getElementById('rapperName').textContent = 'The greatest rapper known to man approaches';
             document.getElementById('rapperBar').textContent = 'The one, the only, the mighty: NOTORIOUS D.A.V.I.D';
             document.getElementById('nextButton').style.display = 'block';
             document.getElementById('submitButton').style.display = 'none';
+            document.getElementById('rapperImage').src = `images/${rapperImages[currentRapperIndex]}`;
         } else {
+            // Display next rapper
             showRapper();
         }
     } else {
+        // Show final screen
         document.getElementById('battleScreen').style.display = 'none';
         document.getElementById('finalScreen').style.display = 'block';
         animateConfetti();
         animateFireworks();
+        // Display Lil Lily image
+        document.getElementById('lilLilyImage').src = 'images/lil_lily.png';
     }
 }
 
@@ -77,4 +83,3 @@ function animateFireworks() {
         fireworks.style.display = 'none';
     }, 5000); // fireworks display for 5 seconds
 }
-
